@@ -2,6 +2,8 @@ package com.hi.appskin_v40.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -20,9 +22,21 @@ public class NotFoundDialog extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         view = getLayoutInflater().inflate(R.layout.dialog_not_faund, null);
-
         View okButton = view.findViewById(R.id.btnOk);
-        okButton.setOnClickListener(v -> dismiss());
+        okButton.setOnClickListener(v -> {
+            dismiss();
+            final String appPackageName = "com.mojang.minecraftpe"; //
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            }
+        });
+
+        View cancelButton = view.findViewById(R.id.cancel);
+        cancelButton.setOnClickListener(v -> {
+            dismiss();
+        });
     }
 
     @NonNull

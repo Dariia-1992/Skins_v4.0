@@ -2,18 +2,19 @@ package com.hi.appskin_v40.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
+import com.hi.appskin_v40.BuildConfig;
 import com.hi.appskin_v40.R;
+import com.hi.appskin_v40.utils.LocalStorage;
 
 public class FileDownloadCompleteDialog extends DialogFragment {
     private View view;
@@ -23,6 +24,21 @@ public class FileDownloadCompleteDialog extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         view = getLayoutInflater().inflate(R.layout.dialog_file_download_comlete, null);
+        view.findViewById(R.id.button_Ok).setOnClickListener(v -> {
+                dismiss();
+        final String appPackageName = BuildConfig.APPLICATION_ID; //
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            }});
+
+        view.findViewById(R.id.never).setOnClickListener(v -> {
+            LocalStorage.setNeverShowRateDialogAgain(requireContext());
+            DownloadNeverCompleteDialog dialog = new DownloadNeverCompleteDialog();
+            dialog.show(getChildFragmentManager(), DownloadNeverCompleteDialog.class.getSimpleName());
+        });
+        view.findViewById(R.id.later).setOnClickListener(v -> dismiss());
     }
 
     @NonNull
@@ -31,14 +47,6 @@ public class FileDownloadCompleteDialog extends DialogFragment {
         Context context = getContext();
         if (context == null)
             return super.onCreateDialog(savedInstanceState);
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_file_download_comlete, null, false);
-//        view.findViewById(R.id.button_Ok).setOnClickListener(v -> dismiss());
-//        view.findViewById(R.id.never).setOnClickListener(v -> {
-//            if (listener != null)
-//                listener.onFinish();
-//            dismiss();
-//        });
-//        view.findViewById(R.id.later).setOnClickListener(v -> dismiss());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setCancelable(false)

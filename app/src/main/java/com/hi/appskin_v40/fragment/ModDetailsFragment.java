@@ -34,6 +34,7 @@ import com.hi.appskin_v40.MainActivity;
 import com.hi.appskin_v40.R;
 import com.hi.appskin_v40.adapter.ImagePagerAdapter;
 import com.hi.appskin_v40.dialogs.FileDownloadCompleteDialog;
+import com.hi.appskin_v40.dialogs.NotFoundDialog;
 import com.hi.appskin_v40.model.Skin;
 import com.hi.appskin_v40.model.SkinsRepository;
 import com.hi.appskin_v40.utils.Config;
@@ -212,7 +213,7 @@ public class ModDetailsFragment extends Fragment {
         if (activities.size() > 0) {
             startActivity(j);
         } else {
-            showDialogSuccessfully();
+            showDialogNotFound();
         }
     }
 
@@ -331,6 +332,11 @@ public class ModDetailsFragment extends Fragment {
         } else {
             Toast.makeText(getContext(), "Download error. Please try later", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void showDialogNotFound() {
+        NotFoundDialog dialog = new NotFoundDialog();
+        dialog.show(getChildFragmentManager(), NotFoundDialog.class.getSimpleName());
     }
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {

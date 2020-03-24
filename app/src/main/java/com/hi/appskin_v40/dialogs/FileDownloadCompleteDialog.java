@@ -17,7 +17,19 @@ import com.hi.appskin_v40.R;
 import com.hi.appskin_v40.utils.LocalStorage;
 
 public class FileDownloadCompleteDialog extends DialogFragment {
+    public interface OnNeverClickListener {
+        void onFinish();
+    }
+
+    private OnNeverClickListener listener;
     private View view;
+
+    public static FileDownloadCompleteDialog createDialog(OnNeverClickListener listener) {
+        FileDownloadCompleteDialog dialog = new FileDownloadCompleteDialog();
+        dialog.listener = listener;
+
+        return dialog;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,17 +38,18 @@ public class FileDownloadCompleteDialog extends DialogFragment {
         view = getLayoutInflater().inflate(R.layout.dialog_file_download_comlete, null);
         view.findViewById(R.id.button_Ok).setOnClickListener(v -> {
                 dismiss();
-        final String appPackageName = BuildConfig.APPLICATION_ID; //
+        final String appPackageName = BuildConfig.APPLICATION_ID;
             try {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-            } catch (android.content.ActivityNotFoundException anfe) {
+            } catch (android.content.ActivityNotFoundException e) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
             }});
 
         view.findViewById(R.id.never).setOnClickListener(v -> {
             LocalStorage.setNeverShowRateDialogAgain(requireContext());
-            DownloadNeverCompleteDialog dialog = new DownloadNeverCompleteDialog();
-            dialog.show(getChildFragmentManager(), DownloadNeverCompleteDialog.class.getSimpleName());
+            if (listener != null)
+                listener.onFinish();
+            dismiss();
         });
         view.findViewById(R.id.later).setOnClickListener(v -> dismiss());
     }

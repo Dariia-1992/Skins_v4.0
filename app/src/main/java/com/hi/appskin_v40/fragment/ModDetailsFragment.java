@@ -33,6 +33,7 @@ import com.hi.appskin_v40.BuildConfig;
 import com.hi.appskin_v40.MainActivity;
 import com.hi.appskin_v40.R;
 import com.hi.appskin_v40.adapter.ImagePagerAdapter;
+import com.hi.appskin_v40.dialogs.DownloadNeverCompleteDialog;
 import com.hi.appskin_v40.dialogs.FileDownloadCompleteDialog;
 import com.hi.appskin_v40.dialogs.NotFoundDialog;
 import com.hi.appskin_v40.model.Skin;
@@ -45,7 +46,6 @@ import com.hi.appskin_v40.utils.LocalStorage;
 import java.io.File;
 import java.util.List;
 
-import me.relex.circleindicator.CircleIndicator;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -56,7 +56,7 @@ public class ModDetailsFragment extends Fragment {
     public static final String ARG_ITEM_ID = "itemId";
     private static final int RC_WRITE_PERMISSIONS = 1000;
     private static final long UPDATE_PERIOD = 1000;
-
+    private FileDownloadCompleteDialog.OnNeverClickListener listener;
     private View view;
     private Skin skin;
     private Handler handler = new Handler();
@@ -96,22 +96,15 @@ public class ModDetailsFragment extends Fragment {
         });
 
         ImageView buttonInstall = view.findViewById(R.id.install_button);
-        buttonInstall.setOnClickListener(v -> {
-            openDownloadedFile();
-        });
+        buttonInstall.setOnClickListener(v -> { openDownloadedFile(); });
+
         ImageView shared = view.findViewById(R.id.link_to_store);
-        shared.setOnClickListener(v -> {
-            goToStore(getContext());
-        });
+        shared.setOnClickListener(v -> { goToStore(getContext()); });
 
         ImageView back = view.findViewById(R.id.back_arrow);
         TextView backText = view.findViewById(R.id.back_text);
-        back.setOnClickListener(v -> {
-            activity.onBackPressed();
-        });
-        backText.setOnClickListener(v -> {
-            activity.onBackPressed();
-        });
+        back.setOnClickListener(v -> { activity.onBackPressed(); });
+        backText.setOnClickListener(v -> { activity.onBackPressed(); });
 
         ImageView favorite =view.findViewById(R.id.favorite_button);
         favorite.setOnClickListener(onFavoriteClicked);
@@ -275,16 +268,13 @@ public class ModDetailsFragment extends Fragment {
                 handlerRunnable = null;
                 finishDownloading();
             }
-
             int progress = (int) ((bytesDownloaded * 100L) / bytesTotal);
             if (progress >= 100) {
                 handler.removeCallbacks(handlerRunnable);
                 handlerRunnable = null;
             }
-
             setDownloadProgress(progress);
         }
-
         cursor.close();
     }
 
@@ -327,7 +317,8 @@ public class ModDetailsFragment extends Fragment {
 
     private void showDialogSuccessfully() {
         if (LocalStorage.isShowRateDialogAgain(requireContext())) {
-            FileDownloadCompleteDialog dialog = new FileDownloadCompleteDialog();
+            listener = this::showDialogDownloadNeverComplete;
+            FileDownloadCompleteDialog dialog = FileDownloadCompleteDialog.createDialog(listener);
             dialog.show(getChildFragmentManager(), FileDownloadCompleteDialog.class.getSimpleName());
         } else {
             Toast.makeText(getContext(), "Download error. Please try later", Toast.LENGTH_LONG).show();
@@ -337,6 +328,12 @@ public class ModDetailsFragment extends Fragment {
     private void showDialogNotFound() {
         NotFoundDialog dialog = new NotFoundDialog();
         dialog.show(getChildFragmentManager(), NotFoundDialog.class.getSimpleName());
+
+    }
+
+    public void showDialogDownloadNeverComplete(){
+        DownloadNeverCompleteDialog dialog = new DownloadNeverCompleteDialog();
+        dialog.show(getChildFragmentManager(), DownloadNeverCompleteDialog.class.getSimpleName());
     }
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -362,7 +359,6 @@ public class ModDetailsFragment extends Fragment {
                         finishDownloading();
                     }
                 }
-
                 handler.removeCallbacks(handlerRunnable);
                 handlerRunnable = null;
                 cursor.close();

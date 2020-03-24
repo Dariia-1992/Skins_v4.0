@@ -1,7 +1,5 @@
 package com.hi.appskin_v40.model;
 
-import androidx.annotation.NonNull;
-
 import com.hi.appskin_v40.R;
 
 import java.util.ArrayList;
@@ -16,16 +14,6 @@ public class SkinsRepository {
             initItems();
         return items;
     }
-//
-//    @NonNull
-//    public static List<Skin> getFavorite(List<Skin> skins) {
-//        List<Skin> favorite = new ArrayList<>();
-//        for (Skin skin : skins){
-//            if (skin.isFavorite() == true)
-//                favorite.add(skin);
-//        }
-//        return favorite;
-//    }
 
     public static Skin getItemById(String itemId) {
         if (itemId == null || itemId.isEmpty())

@@ -67,8 +67,7 @@ public class MainFragment extends Fragment{
         if (MODE_FAVORITE) {
             allSkins.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color_favorite));
             favoriteList.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color));
-        }
-        else {
+        } else {
             favoriteList.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color_favorite));
             allSkins.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color));
         }

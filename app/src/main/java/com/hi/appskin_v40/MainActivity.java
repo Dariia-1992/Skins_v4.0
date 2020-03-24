@@ -2,16 +2,11 @@ package com.hi.appskin_v40;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.DialogFragment;
-import androidx.navigation.NavAction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -24,22 +19,14 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.hi.appskin_v40.fragment.IRewardAdded;
-import com.hi.appskin_v40.model.Skin;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements RewardedVideoAdListener {
 
     private InterstitialAd interstitialAd;
     private RewardedVideoAd videoAd;
-
     private IRewardAdded fragmentCallback;
     private IRewardAdded calledOnResume;
-
     private NavController navController;
-
-//    private final ArrayList<Skin> allSkinsList = new ArrayList<>();
-//    private final ArrayList<Skin> filteredSkinsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
     public void showInterstitialAd() {
         if (interstitialAd != null && interstitialAd.isLoaded()) {
             interstitialAd.show();
-            //LocalStorage.setOpensWithoutAd(this, 0);
         }
     }
 

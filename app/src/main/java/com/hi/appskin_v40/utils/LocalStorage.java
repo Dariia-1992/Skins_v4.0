@@ -8,7 +8,7 @@ import com.hi.appskin_v40.model.Skin;
 public class LocalStorage {
     private static final String PREFERENCES_FILE = "preferences_file";
     private static final String KEY_OPENS_WITHOUT_ADD = "opens_without_ad";
-    private static final String KEY_DONT_SHOW_AGAIN = "dont_show_again";
+    private static final String KEY_DONT_SHOW_AGAIN = "don`t_show_again";
 
 
     public static long getIdForModInfo(Context context, Skin modInfo) {

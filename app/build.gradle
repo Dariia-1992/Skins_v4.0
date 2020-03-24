@@ -64,4 +64,7 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.0'
     // Easy permissions
     implementation 'pub.devrel:easypermissions:3.0.0'
+    // Calligraphy (custom fonts)
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
 }

@@ -29,7 +29,8 @@
                 android:layout_centerVertical="true"
                 android:textColor="@color/white"
                 android:textSize="18dp"
-                android:textStyle="bold"/>
+                fontPath="fonts/Roboto-Medium.ttf"
+                tools:ignore="MissingPrefix"/>
             <ImageView
                 android:id="@+id/link_to_store"
                 android:layout_width="@dimen/toolbar_menu_width"
@@ -78,6 +79,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginTop="2dp"
                 android:layout_marginStart="12dp"
+                fontPath="fonts/Roboto-Medium.ttf"
+                tools:ignore="MissingPrefix"
                 tools:text="Test data" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,7 +138,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:textSize="8dp"
-                    android:textStyle="bold"
+                    fontPath="fonts/Roboto-Regular.ttf"
+                    tools:ignore="MissingPrefix"
                     android:layout_marginRight="@dimen/margin"
                     android:text="@string/update_text"/>
             </LinearLayout>
@@ -232,7 +236,7 @@
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
                 android:textStyle="normal"
-                fontPath="fonts/roboto_regular.ttf"
+                fontPath="fonts/Roboto-Regular.ttf"
                 tools:ignore="MissingPrefix"
                 android:textColor="@color/colorPrimaryDark"/>
 

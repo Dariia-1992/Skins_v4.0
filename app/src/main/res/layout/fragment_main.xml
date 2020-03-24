@@ -41,7 +41,9 @@
                         android:layout_centerHorizontal="true"
                         android:textStyle="bold"
                         android:textSize="20dp"
-                        android:textColor="@color/colorPrimaryDark"/>
+                        fontPath="fonts/Roboto-Medium.ttf"
+                        android:textColor="@color/colorPrimaryDark"
+                        tools:ignore="MissingPrefix" />
 
                     <androidx.appcompat.widget.SearchView
                         android:id="@+id/search"
@@ -75,6 +77,8 @@
                         android:layout_marginLeft="@dimen/margin"
                         android:layout_marginRight="20dp"
                         android:layout_centerVertical="true"
+                        fontPath="fonts/Roboto-Regular.ttf"
+                        tools:ignore="MissingPrefix"
                         android:textColor="@color/toolbar_text_color"
                         android:text="@string/text_here"/>
 
@@ -86,6 +90,8 @@
                         android:textColor="@color/toolbar_text_color_favorite"
                         android:background="@null"
                         android:layout_centerVertical="true"
+                        fontPath="fonts/Roboto-Regular.ttf"
+                        tools:ignore="MissingPrefix"
                         android:text="@string/favorite"/>
                 </RelativeLayout>
 
@@ -106,6 +112,7 @@
             android:layout_gravity="start"
             android:background="@color/white"
             app:itemTextColor="@color/colorPrimaryDark"
+            android:visibility="gone"
             app:menu="@menu/navigation_menu"/>
 
     </androidx.drawerlayout.widget.DrawerLayout>

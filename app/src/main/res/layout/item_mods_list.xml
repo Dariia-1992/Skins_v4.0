@@ -29,6 +29,8 @@
             android:textStyle="bold"
             android:layout_centerVertical="true"
             android:layout_marginTop="2dp"
+            fontPath="fonts/Roboto-Medium.ttf"
+            tools:ignore="MissingPrefix"
             android:layout_marginStart="12dp"
             tools:text="Test data" />
         <LinearLayout
@@ -86,7 +88,8 @@
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:textSize="8dp"
-                android:textStyle="bold"
+                fontPath="fonts/Roboto-Regular.ttf"
+                tools:ignore="MissingPrefix"
                 android:layout_marginRight="@dimen/margin"
                 android:text="@string/update_text"/>
         </LinearLayout>

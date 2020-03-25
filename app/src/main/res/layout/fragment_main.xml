@@ -84,10 +84,10 @@
                         <TextView
                             android:id="@+id/button_text"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/margin"
                             android:layout_marginRight="20dp"
-                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical"
                             fontPath="fonts/CentieSans.ttf"
                             tools:ignore="MissingPrefix"
                             android:textColor="@color/toolbar_text_color"
@@ -96,11 +96,11 @@
                         <TextView
                             android:id="@+id/button_favorite"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_toRightOf="@id/button_text"
+                            android:gravity="center_vertical"
                             android:textColor="@color/toolbar_text_color_favorite"
                             android:background="@null"
-                            android:layout_centerVertical="true"
                             fontPath="fonts/CentieSans.ttf"
                             tools:ignore="MissingPrefix"
                             android:text="@string/favorite"/>

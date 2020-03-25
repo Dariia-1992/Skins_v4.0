@@ -46,6 +46,7 @@ import com.hi.appskin_v40.utils.LocalStorage;
 import java.io.File;
 import java.util.List;
 
+import me.relex.circleindicator.CircleIndicator;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -81,10 +82,15 @@ public class ModDetailsFragment extends Fragment {
         ViewPager viewPager = view.findViewById(R.id.viewPager);
         TextView skinTitle = view.findViewById(R.id.titleView);
         TextView description = view.findViewById(R.id.descriptionView);
+        CircleIndicator indicator = view.findViewById(R.id.circleIndicator);
+        View isUpdated = view.findViewById(R.id.isUpdate);
 
         viewPager.setAdapter(new ImagePagerAdapter(getContext(), skin.getBigImages()));
+        indicator.setViewPager(viewPager);
+        indicator.setVisibility(skin.getBigImages().length == 1 ? View.GONE : View.VISIBLE);
         skinTitle.setText(skin.getTitle());
         description.setText(skin.getDescription());
+        isUpdated.setVisibility(skin.isUpdatedToday() ? View.VISIBLE : View.GONE);
 
         setRating(view.findViewById(R.id.ratingContainer), skin.getRating());
         setDescriptionImages(view.findViewById(R.id.descImagesContainer), skin.getDescriptionImages());
@@ -367,7 +373,6 @@ public class ModDetailsFragment extends Fragment {
     };
 
     private final View.OnClickListener onFavoriteClicked = v -> {
-
         if (getContext() == null || skin == null)
             return;
 

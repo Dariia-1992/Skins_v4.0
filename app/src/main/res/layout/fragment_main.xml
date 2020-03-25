@@ -39,9 +39,8 @@
                         android:text="@string/explore"
                         android:layout_marginTop="14dp"
                         android:layout_centerHorizontal="true"
-                        android:textStyle="bold"
                         android:textSize="20dp"
-                        fontPath="fonts/Roboto-Medium.ttf"
+                        fontPath="fonts/CentieSans.ttf"
                         android:textColor="@color/colorPrimaryDark"
                         tools:ignore="MissingPrefix" />
 
@@ -77,7 +76,7 @@
                         android:layout_marginLeft="@dimen/margin"
                         android:layout_marginRight="20dp"
                         android:layout_centerVertical="true"
-                        fontPath="fonts/Roboto-Regular.ttf"
+                        fontPath="fonts/CentieSans.ttf"
                         tools:ignore="MissingPrefix"
                         android:textColor="@color/toolbar_text_color"
                         android:text="@string/text_here"/>
@@ -90,7 +89,7 @@
                         android:textColor="@color/toolbar_text_color_favorite"
                         android:background="@null"
                         android:layout_centerVertical="true"
-                        fontPath="fonts/Roboto-Regular.ttf"
+                        fontPath="fonts/CentieSans.ttf"
                         tools:ignore="MissingPrefix"
                         android:text="@string/favorite"/>
                 </RelativeLayout>
@@ -105,15 +104,14 @@
                 tools:listitem="@layout/item_mods_list" />
             </RelativeLayout>
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="@color/white"
-            app:itemTextColor="@color/colorPrimaryDark"
-            android:visibility="gone"
-            app:menu="@menu/navigation_menu"/>
+<!--        <com.google.android.material.navigation.NavigationView-->
+<!--            android:id="@+id/nav_view"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="start"-->
+<!--            android:background="@color/white"-->
+<!--            app:itemTextColor="@color/colorPrimaryDark"-->
+<!--            app:menu="@menu/navigation_menu"/>-->
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </RelativeLayout>

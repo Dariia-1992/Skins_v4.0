@@ -34,9 +34,7 @@ public class NotFoundDialog extends DialogFragment {
         });
 
         View cancelButton = view.findViewById(R.id.cancel);
-        cancelButton.setOnClickListener(v -> {
-            dismiss();
-        });
+        cancelButton.setOnClickListener(v -> dismiss());
     }
 
     @NonNull

@@ -15,6 +15,7 @@
     <color name="progress_bar_background">#b7b7b7</color>
     <color name="btn_ok">#197b30</color>
     <color name="button_ok">#0076a3</color>
+    <color name="func_button">#6d6d6d</color>
 
     <array name="shadow_gradient">
         <item>#00000000</item>

@@ -41,14 +41,12 @@ public class SkinsAdapter extends RecyclerView.Adapter<SkinsAdapter.ViewHolder> 
         final Skin skin = items.get(position);
         holder.postImageView.setImageResource(skin.getFirstImage());
         holder.titleView.setText(skin.getTitle());
+        holder.isUpdate.setVisibility(skin.isUpdatedToday() ? View.VISIBLE : View.GONE);
         setRating(holder, skin);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null){
-                    listener.onClicked(items.get(position).getId());
-                }
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null){
+                listener.onClicked(items.get(position).getId());
             }
         });
     }
@@ -70,13 +68,15 @@ public class SkinsAdapter extends RecyclerView.Adapter<SkinsAdapter.ViewHolder> 
         TextView titleView ;
         ImageView postImageView;
         ViewGroup ratingContainer;
+        View isUpdate;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             postImageView = itemView.findViewById(R.id.postImageView);
             titleView = itemView.findViewById(R.id.titleView);
             ratingContainer = itemView.findViewById(R.id.ratingContainer);
+            isUpdate = itemView.findViewById(R.id.isUpdate);
         }
     }
 }

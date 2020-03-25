@@ -20,6 +20,8 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.hi.appskin_v40.fragment.IRewardAdded;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 public class MainActivity extends AppCompatActivity implements RewardedVideoAdListener {
 
     private InterstitialAd interstitialAd;
@@ -87,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(newBase);
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
     }
 
     private void loadRewardedVideoAd() {

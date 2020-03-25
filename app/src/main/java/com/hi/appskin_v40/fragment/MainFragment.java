@@ -1,6 +1,5 @@
 package com.hi.appskin_v40.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.SearchView;

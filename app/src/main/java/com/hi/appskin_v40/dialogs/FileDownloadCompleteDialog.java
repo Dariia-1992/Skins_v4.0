@@ -37,13 +37,14 @@ public class FileDownloadCompleteDialog extends DialogFragment {
 
         view = getLayoutInflater().inflate(R.layout.dialog_file_download_comlete, null);
         view.findViewById(R.id.button_Ok).setOnClickListener(v -> {
-                dismiss();
-        final String appPackageName = BuildConfig.APPLICATION_ID;
-            try {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-            } catch (android.content.ActivityNotFoundException e) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-            }});
+            dismiss();
+            LocalStorage.setNeverShowRateDialogAgain(requireContext());
+            final String appPackageName = BuildConfig.APPLICATION_ID;
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                } catch (android.content.ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                }});
 
         view.findViewById(R.id.never).setOnClickListener(v -> {
             LocalStorage.setNeverShowRateDialogAgain(requireContext());
@@ -51,6 +52,7 @@ public class FileDownloadCompleteDialog extends DialogFragment {
                 listener.onFinish();
             dismiss();
         });
+
         view.findViewById(R.id.later).setOnClickListener(v -> dismiss());
     }
 

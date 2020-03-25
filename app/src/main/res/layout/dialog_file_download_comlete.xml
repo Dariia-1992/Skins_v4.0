@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
@@ -11,7 +11,7 @@
         android:layout_marginLeft="18dp"
         android:layout_marginRight="8dp"
         android:textSize="20sp"
-        android:textStyle="bold"
+        android:textAppearance="@style/TextAppearance.FontPath"
         android:textColor="@color/colorPrimaryDark"
         android:text="@string/download_complete" />
     <TextView
@@ -21,7 +21,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_below="@id/title"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
         android:text="@string/download_complete_description" />
     <RelativeLayout
@@ -35,8 +34,9 @@
             android:layout_height="wrap_content"
             android:text="@string/later"
             android:layout_marginLeft="16dp"
-            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.FontPath"
             android:layout_centerVertical="true"
+            android:textColor="@color/func_button"
             android:layout_alignParentLeft="true"/>
 
         <TextView
@@ -46,7 +46,8 @@
             android:text="@string/never"
             android:layout_toLeftOf="@+id/button_Ok"
             android:layout_marginRight="16dp"
-            android:textStyle="bold"
+            android:textColor="@color/func_button"
+            android:textAppearance="@style/TextAppearance.FontPath"
             android:layout_centerVertical="true"/>
 
         <Button

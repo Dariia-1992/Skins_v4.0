@@ -60,10 +60,8 @@ public class SkinsRepository {
         // Screenshot
         addItem("Test Title 3",
                 new int[]{
-                        R.drawable.item_1_1,
-                        R.drawable.item_1_2,
-                        R.drawable.item_1_3},
-                5,
+                        R.drawable.item_1_1},
+                4,
                 R.string.text_description_1,
                 "https://datazlasaya.sgp1.cdn.digitaloceanspaces.com/mod-blueline/darkglade03-furniture-addon-v3.mcaddon",
                 new int[]{

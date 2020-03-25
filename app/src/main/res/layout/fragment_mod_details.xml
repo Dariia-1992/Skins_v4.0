@@ -29,7 +29,7 @@
                 android:layout_centerVertical="true"
                 android:textColor="@color/white"
                 android:textSize="18dp"
-                fontPath="fonts/Roboto-Medium.ttf"
+                fontPath="fonts/CentieSans.ttf"
                 tools:ignore="MissingPrefix"/>
             <ImageView
                 android:id="@+id/link_to_store"
@@ -59,13 +59,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/background_image_height"/>
 
-<!--            <me.relex.circleindicator.CircleIndicator-->
-<!--                android:id="@+id/circleIndicator"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignBottom="@+id/viewPager"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_marginBottom="12dp" />-->
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/circleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/viewPager"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="12dp" />
             <TextView
                 android:id="@+id/titleView"
                 android:layout_width="match_parent"
@@ -75,11 +75,10 @@
                 android:layout_below="@id/viewPager"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="2dp"
                 android:layout_marginStart="12dp"
-                fontPath="fonts/Roboto-Medium.ttf"
+                fontPath="fonts/CentieSans.ttf"
                 tools:ignore="MissingPrefix"
                 tools:text="Test data" />
             <LinearLayout
@@ -134,11 +133,12 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/isUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:textSize="8dp"
-                    fontPath="fonts/Roboto-Regular.ttf"
+                    fontPath="fonts/CentieSans.ttf"
                     tools:ignore="MissingPrefix"
                     android:layout_marginRight="@dimen/margin"
                     android:text="@string/update_text"/>
@@ -203,8 +203,7 @@
                     android:textColor="@color/white"
                     android:textSize="10sp"
                     android:layout_marginTop="3dp"
-                    tools:ignore="MissingPrefix"
-                    android:textStyle="bold"
+                    android:textAppearance="@style/TextAppearance.FontPath"
                     android:layout_marginLeft="@dimen/margin"
                     android:layout_marginBottom="@dimen/margin"
                     android:layout_below="@id/progressBar"
@@ -235,7 +234,6 @@
                 android:textSize="13sp"
                 android:layout_marginLeft="@dimen/margin"
                 android:layout_marginRight="@dimen/margin"
-                android:textStyle="normal"
                 fontPath="fonts/Roboto-Regular.ttf"
                 tools:ignore="MissingPrefix"
                 android:textColor="@color/colorPrimaryDark"/>

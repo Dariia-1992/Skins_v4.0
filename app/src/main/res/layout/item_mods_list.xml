@@ -25,11 +25,10 @@
             android:maxLines="1"
             android:layout_below="@id/postImageView"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:textSize="16sp"
             android:layout_centerVertical="true"
             android:layout_marginTop="2dp"
-            fontPath="fonts/Roboto-Medium.ttf"
+            fontPath="fonts/CentieSans.ttf"
             tools:ignore="MissingPrefix"
             android:layout_marginStart="12dp"
             tools:text="Test data" />
@@ -84,11 +83,12 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/isUpdate"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:textSize="8dp"
-                fontPath="fonts/Roboto-Regular.ttf"
+                fontPath="fonts/CentieSans.ttf"
                 tools:ignore="MissingPrefix"
                 android:layout_marginRight="@dimen/margin"
                 android:text="@string/update_text"/>

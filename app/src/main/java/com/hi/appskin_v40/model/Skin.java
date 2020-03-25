@@ -12,8 +12,6 @@ public class Skin {
     private @StringRes int description;
     private String url;
     private int [] descriptionImages;
-    private String favoriteName;
-
 
     public Skin(String id, String title, int[] bigImage, int rating, int description, String url, int [] descriptionImages) {
         this.id = id;
@@ -25,65 +23,12 @@ public class Skin {
         this.descriptionImages = descriptionImages;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int[] getBigImages() {
-        return bigImages;
-    }
-
-    public void setBigImages(int[] bigImages) {
-        this.bigImages = bigImages;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public String getFavoriteName() {
-        return favoriteName;
-    }
-
-    public void setFavoriteName(String favoriteName) {
-        this.favoriteName = favoriteName;
-    }
-
-    public int getDescription() {
-        return description;
-    }
-
-    public void setDescription(int description) {
-        this.description = description;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public int[] getDescriptionImages() {
-        return descriptionImages;
-    }
-
-    public void setDescriptionImages(int[] descriptionImages) {
-        this.descriptionImages = descriptionImages;
-    }
+    public String getId() { return id; }
+    public String getTitle() { return title; }
+    public int[] getBigImages() { return bigImages; }
+    public int getDescription() { return description; }
+    public String getUrl() { return url; }
+    public int[] getDescriptionImages() { return descriptionImages; }
 
     public int getRating() {
         if (rating < 0)
@@ -101,4 +46,6 @@ public class Skin {
     public String generateKey() {
         return MD5.generate(title + url);
     }
+
+    public boolean isUpdatedToday() { return true; }
 }

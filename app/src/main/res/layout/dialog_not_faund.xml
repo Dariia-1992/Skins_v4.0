@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="8dp"
+        android:textAppearance="@style/TextAppearance.FontPath"
+        android:layout_marginLeft="@dimen/margin"
         android:textColor="@color/colorPrimaryDark"
         android:text="@string/minecraft_not_found_title"/>
     <TextView
@@ -17,11 +18,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
         android:layout_below="@id/title"
-        android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
         android:text="@string/minecraft_not_found_description"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -45,7 +47,8 @@
             android:text="@string/cancel"
             android:layout_toLeftOf="@+id/btnOk"
             android:layout_marginRight="16dp"
-            android:textStyle="bold"
+            android:textColor="@color/func_button"
+            android:textAppearance="@style/TextAppearance.FontPath"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 </LinearLayout>

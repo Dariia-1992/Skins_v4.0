@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -20,6 +21,7 @@
                 android:id="@+id/toolbar_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <RelativeLayout
                     android:id="@+id/toolbar_container"
                     android:layout_width="match_parent"
@@ -61,48 +63,62 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_below="@id/toolbar_container"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/background_color">
-
-                    <TextView
-                        android:id="@+id/button_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin"
-                        android:layout_marginRight="20dp"
-                        android:layout_centerVertical="true"
-                        fontPath="fonts/CentieSans.ttf"
-                        tools:ignore="MissingPrefix"
-                        android:textColor="@color/toolbar_text_color"
-                        android:text="@string/text_here"/>
-
-                    <TextView
-                        android:id="@+id/button_favorite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/button_text"
-                        android:textColor="@color/toolbar_text_color_favorite"
-                        android:background="@null"
-                        android:layout_centerVertical="true"
-                        fontPath="fonts/CentieSans.ttf"
-                        tools:ignore="MissingPrefix"
-                        android:text="@string/favorite"/>
-                </RelativeLayout>
-
             </RelativeLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/contentView"
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/toolbar_header"
-                tools:listitem="@layout/item_mods_list" />
-            </RelativeLayout>
+                android:layout_below="@id/toolbar_header">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/tab_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:background="@color/background_color"
+                        app:layout_scrollFlags="scroll|enterAlways">
+
+                        <TextView
+                            android:id="@+id/button_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/margin"
+                            android:layout_marginRight="20dp"
+                            android:layout_centerVertical="true"
+                            fontPath="fonts/CentieSans.ttf"
+                            tools:ignore="MissingPrefix"
+                            android:textColor="@color/toolbar_text_color"
+                            android:text="@string/text_here"/>
+
+                        <TextView
+                            android:id="@+id/button_favorite"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/button_text"
+                            android:textColor="@color/toolbar_text_color_favorite"
+                            android:background="@null"
+                            android:layout_centerVertical="true"
+                            fontPath="fonts/CentieSans.ttf"
+                            tools:ignore="MissingPrefix"
+                            android:text="@string/favorite"/>
+                    </RelativeLayout>
+
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/contentView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/toolbar_header"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:listitem="@layout/item_mods_list" />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        </RelativeLayout>
 
 <!--        <com.google.android.material.navigation.NavigationView-->
 <!--            android:id="@+id/nav_view"-->

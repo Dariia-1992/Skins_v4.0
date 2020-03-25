@@ -20,25 +20,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/toolbar_height"
                 android:background="@color/background_color">
-                <ImageView
-                    android:id="@+id/back_arrow"
-                    android:layout_width="@dimen/toolbar_menu_width"
-                    android:layout_height="@dimen/toolbar_menu_height"
-                    android:src="@drawable/back"
-                    android:layout_marginStart="@dimen/margin"
-                    android:layout_centerVertical="true"/>
-                <TextView
-                    android:id="@+id/back_text"
+                <RelativeLayout
+                    android:id="@+id/back"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/back_header"
-                    android:layout_toRightOf="@id/back_arrow"
-                    android:layout_marginLeft="@dimen/margin"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-                    fontPath="fonts/CentieSans.ttf"
-                    tools:ignore="MissingPrefix"/>
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/back_arrow"
+                        android:layout_width="@dimen/toolbar_menu_width"
+                        android:layout_height="@dimen/toolbar_menu_height"
+                        android:src="@drawable/back"
+                        android:layout_marginStart="@dimen/margin"
+                        android:layout_centerVertical="true"/>
+                    <TextView
+                        android:id="@+id/back_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/back_header"
+                        android:layout_toRightOf="@id/back_arrow"
+                        android:layout_marginLeft="@dimen/margin"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        fontPath="fonts/CentieSans.ttf"
+                        tools:ignore="MissingPrefix"/>
+            </RelativeLayout>
                 <ImageView
                     android:id="@+id/link_to_store"
                     android:layout_width="@dimen/toolbar_menu_width"

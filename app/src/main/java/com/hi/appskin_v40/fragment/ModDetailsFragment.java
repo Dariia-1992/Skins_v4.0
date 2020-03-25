@@ -119,10 +119,8 @@ public class ModDetailsFragment extends Fragment {
         ImageView shared = view.findViewById(R.id.link_to_store);
         shared.setOnClickListener(v -> { goToStore(getContext()); });
 
-        ImageView back = view.findViewById(R.id.back_arrow);
-        TextView backText = view.findViewById(R.id.back_text);
-        back.setOnClickListener(v -> { activity.onBackPressed(); });
-        backText.setOnClickListener(v -> { activity.onBackPressed(); });
+        View back = view.findViewById(R.id.back);
+        back.setOnClickListener(v -> activity.onBackPressed());
 
         ImageView favorite =view.findViewById(R.id.favorite_button);
         favorite.setOnClickListener(onFavoriteClicked);

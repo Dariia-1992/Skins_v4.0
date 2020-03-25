@@ -9,14 +9,21 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.hi.appskin_v40.fragment.MainFragment"
-        android:label="MainFragment" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_modDetailsFragment"
-            app:destination="@id/modDetailsFragment" />
+            app:destination="@id/modDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/modDetailsFragment"
         android:name="com.hi.appskin_v40.fragment.ModDetailsFragment"
-        android:label="fragment_mod_details"
-        tools:layout="@layout/fragment_mod_details" />
+        tools:layout="@layout/fragment_mod_details">
+        <argument
+            android:name="itemId"
+            app:argType="string" />
+    </fragment>
 </navigation>

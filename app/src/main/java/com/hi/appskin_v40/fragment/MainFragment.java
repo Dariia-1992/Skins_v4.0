@@ -12,12 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdView;
 import com.hi.appskin_v40.R;
 import com.hi.appskin_v40.adapter.SkinsAdapter;
 import com.hi.appskin_v40.model.Skin;
 import com.hi.appskin_v40.model.SkinsRepository;
+import com.hi.appskin_v40.utils.AdHelper;
 import com.hi.appskin_v40.utils.FavoritesManager;
 
 import java.util.ArrayList;
@@ -42,10 +45,15 @@ public class MainFragment extends Fragment{
     TextView allSkins;
     TextView favoriteList;
 
+    // Banner Ad
+    private FrameLayout adContainer;
+    private AdView adView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_main, container, false);
+        adContainer = view.findViewById(R.id.ad_container);
         adapter = new SkinsAdapter(currentList, listener);
         RecyclerView recyclerView = view.findViewById(R.id.contentView);
         recyclerView.setAdapter(adapter);
@@ -55,6 +63,10 @@ public class MainFragment extends Fragment{
         View searchButton = view.findViewById(R.id.toolbar_search);
         searchButton.setOnClickListener(v -> setupSearch(true));
 
+        // Initialize the Mobile Ads SDK.
+        adView = new AdView(requireContext());
+        adContainer.post(() -> AdHelper.loadBanner(MainFragment.this, adView, adContainer));
+
         setupSearch(false);
         initMode();
         return view;
@@ -63,6 +75,11 @@ public class MainFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
+
+        if (adView != null) {
+            adView.resume();
+        }
+
         if (MODE_FAVORITE) {
             allSkins.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color_favorite));
             favoriteList.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color));
@@ -70,6 +87,22 @@ public class MainFragment extends Fragment{
             favoriteList.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color_favorite));
             allSkins.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color));
         }
+    }
+
+    @Override
+    public void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
     private void getFavorite() {

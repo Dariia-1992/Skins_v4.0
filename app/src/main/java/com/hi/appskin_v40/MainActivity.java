@@ -41,9 +41,6 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-        // Banner ad
-        AdView adView = findViewById(R.id.adMob);
-        adView.loadAd(new AdRequest.Builder().build());
 
         // Interstitial ad
         interstitialAd = new InterstitialAd(this);

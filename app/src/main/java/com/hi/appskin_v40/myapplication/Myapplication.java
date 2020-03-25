@@ -2,6 +2,7 @@ package com.hi.appskin_v40.myapplication;
 
 import android.app.Application;
 
+import com.google.android.gms.ads.MobileAds;
 import com.hi.appskin_v40.R;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
@@ -20,5 +21,7 @@ public class Myapplication extends Application {
                                 .setFontAttrId(R.attr.fontPath)
                                 .build()))
                 .build());
+
+        MobileAds.initialize(this, initializationStatus -> {});
     }
 }

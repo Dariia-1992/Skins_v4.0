@@ -19,6 +19,7 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.hi.appskin_v40.fragment.IRewardAdded;
+import com.hi.appskin_v40.utils.LocalStorage;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
     public void showInterstitialAd() {
         if (interstitialAd != null && interstitialAd.isLoaded()) {
             interstitialAd.show();
+            LocalStorage.setOpensWithoutAd(this, 0);
         }
     }
 

@@ -1,15 +1,14 @@
-package com.hi.appskin_v40.myapplication;
+package com.hi.appskin_v40;
 
 import android.app.Application;
 
 import com.google.android.gms.ads.MobileAds;
-import com.hi.appskin_v40.R;
 
 import io.github.inflationx.calligraphy3.CalligraphyConfig;
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
 import io.github.inflationx.viewpump.ViewPump;
 
-public class Myapplication extends Application {
+public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();

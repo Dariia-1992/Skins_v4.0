@@ -217,7 +217,7 @@ public class ModDetailsFragment extends Fragment {
 
     private void updateFavoriteState() {
         ImageView image = view.findViewById(R.id.favorite_button);
-        image.setImageResource(FavoritesManager.getInstance().isFavorite(getContext(), skin.getTitle())
+        image.setImageResource(FavoritesManager.getInstance().isFavorite(getContext(), skin)
                 ? R.drawable.is_favourite_button
                 : R.drawable.favourite_button_false);
     }
@@ -405,11 +405,11 @@ public class ModDetailsFragment extends Fragment {
             return;
 
         FavoritesManager manager = FavoritesManager.getInstance();
-        boolean isFavorite = manager.isFavorite(getContext(), skin.getTitle());
+        boolean isFavorite = manager.isFavorite(getContext(), skin);
         if (isFavorite)
-            manager.removeFavorite(getContext(), skin.getTitle());
+            manager.removeFavorite(getContext(), skin);
         else
-            manager.addToFavorite(getContext(), skin.getTitle());
+            manager.addToFavorite(getContext(), skin);
 
         updateFavoriteState();
     };

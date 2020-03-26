@@ -14,7 +14,6 @@ import com.hi.appskin_v40.model.Skin;
 
 import java.util.List;
 
-
 public class SkinsAdapter extends RecyclerView.Adapter<SkinsAdapter.ViewHolder> {
     public interface OnClickItem {
         void onClicked(String id);
@@ -23,7 +22,7 @@ public class SkinsAdapter extends RecyclerView.Adapter<SkinsAdapter.ViewHolder> 
     private final OnClickItem listener;
     private List<Skin> items;
 
-    public SkinsAdapter(List<Skin> mods,OnClickItem listener) {
+    public SkinsAdapter(List<Skin> mods, OnClickItem listener) {
         items = mods;
         this.listener = listener;
     }
@@ -31,8 +30,7 @@ public class SkinsAdapter extends RecyclerView.Adapter<SkinsAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_mods_list, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mods_list, parent, false);
         return new ViewHolder(view);
     }
 
@@ -64,8 +62,8 @@ public class SkinsAdapter extends RecyclerView.Adapter<SkinsAdapter.ViewHolder> 
         }
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titleView ;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        TextView titleView;
         ImageView postImageView;
         ViewGroup ratingContainer;
         View isUpdate;

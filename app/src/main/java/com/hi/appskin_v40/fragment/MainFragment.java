@@ -42,8 +42,8 @@ public class MainFragment extends Fragment{
     private SkinsAdapter adapter;
     private String searchStr;
 
-    TextView allSkins;
-    TextView favoriteList;
+    private TextView allSkins;
+    private TextView favoriteList;
 
     // Banner Ad
     private FrameLayout adContainer;
@@ -109,7 +109,7 @@ public class MainFragment extends Fragment{
         favoriteSkins.clear();
         FavoritesManager manager = FavoritesManager.getInstance();
         for (Skin skin : fulSkins) {
-            if (manager.isFavorite(getContext(), skin.getTitle()))
+            if (manager.isFavorite(getContext(), skin))
                 favoriteSkins.add(skin);
         }
     }

@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 
+import com.hi.appskin_v40.model.Skin;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,30 +24,30 @@ public class FavoritesManager {
         return instance;
     }
 
-    public boolean isFavorite(Context context, String number) {
+    public boolean isFavorite(Context context, Skin skin) {
         initData(context);
 
         for (String item : favorites)
-            if (item.equalsIgnoreCase(number))
+            if (item.equalsIgnoreCase(skin.getTitle()))
                 return true;
 
         return false;
     }
 
-    public void addToFavorite(Context context, String number) {
+    public void addToFavorite(Context context, Skin skin) {
         initData(context);
 
-        if (!isFavorite(context, number)) {
-            favorites.add(number);
+        if (!isFavorite(context, skin)) {
+            favorites.add(skin.getTitle());
             saveToStorage(context, favorites);
         }
     }
 
-    public void removeFavorite(Context context, String number) {
+    public void removeFavorite(Context context, Skin skin) {
         initData(context);
 
-        if (isFavorite(context, number)) {
-            favorites.remove(number);
+        if (isFavorite(context, skin)) {
+            favorites.remove(skin.getTitle());
             saveToStorage(context, favorites);
         }
     }
@@ -55,12 +57,11 @@ public class FavoritesManager {
             favorites = readFromStorage(context);
     }
 
-    private static @NonNull
-    Set<String> readFromStorage(Context context) {
+    private static @NonNull Set<String> readFromStorage(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(STORAGE_NAME, Context.MODE_PRIVATE);
         Set<String> data = preferences.getStringSet(KEY_FAVORITES, new HashSet<>());
 
-        return data == null ? new HashSet<>() : new HashSet<>(data);
+        return data.isEmpty() ? new HashSet<>() : new HashSet<>(data);
     }
 
     private static void saveToStorage(Context context, Set<String> values) {

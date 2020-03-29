@@ -45,6 +45,9 @@ public class MainFragment extends Fragment{
     private TextView allSkins;
     private TextView favoriteList;
 
+    private View textLine;
+    private View favoriteLine;
+
     // Banner Ad
     private FrameLayout adContainer;
     private AdView adView;
@@ -117,18 +120,22 @@ public class MainFragment extends Fragment{
     private void initMode() {
         allSkins = view.findViewById(R.id.button_text);
         favoriteList = view.findViewById(R.id.button_favorite);
+        textLine = view.findViewById(R.id.under_text_line);
+        favoriteLine = view.findViewById(R.id.under_favorite_line);
+        favoriteLine.setVisibility(View.GONE);
+        textLine.setVisibility(View.VISIBLE);
 
         allSkins.setOnClickListener(v -> {
-            setCheckedState(allSkins, true);
-            setCheckedState(favoriteList, false);
+            setCheckedState(allSkins, true, textLine);
+            setCheckedState(favoriteList, false, favoriteLine);
             setCurrent(fulSkins);
             MODE_FAVORITE = false;
         });
 
         getFavorite();
         favoriteList.setOnClickListener(v -> {
-            setCheckedState(favoriteList, true);
-            setCheckedState(allSkins, false);
+            setCheckedState(favoriteList, true, favoriteLine);
+            setCheckedState(allSkins, false, textLine);
             setCurrent(favoriteSkins);
             MODE_FAVORITE = true;
         });
@@ -211,10 +218,11 @@ public class MainFragment extends Fragment{
         return false;
     }
 
-    private void setCheckedState(TextView textView, boolean isChecked) {
+    private void setCheckedState(TextView textView, boolean isChecked, View line) {
         if (getContext() == null)
             return;
         textView.setTextColor(ContextCompat.getColor(getContext(), isChecked ? R.color.toolbar_text_color : R.color.toolbar_text_color_favorite));
+        line.setVisibility(isChecked ? View.VISIBLE : View.GONE);
     }
 
     private void setCurrent(List<Skin> skins) {

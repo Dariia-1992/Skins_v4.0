@@ -23,14 +23,14 @@
         <TextView
             android:id="@+id/titleView"
             android:layout_width="match_parent"
-            android:layout_height="28dp"
+            android:layout_height="20dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:layout_below="@id/postImageView"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
             android:layout_centerVertical="true"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="6dp"
             fontPath="fonts/CentieSans.ttf"
             tools:ignore="MissingPrefix"
             android:layout_marginStart="12dp"
@@ -96,5 +96,11 @@
                 android:layout_marginRight="@dimen/margin"
                 android:text="@string/update_text"/>
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimaryDark"/>
     </RelativeLayout>
 </RelativeLayout>

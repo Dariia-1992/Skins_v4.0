@@ -67,8 +67,7 @@
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/toolbar_header"
-                android:layout_above="@id/ad_container">
+                android:layout_below="@id/toolbar_header">
 
                 <com.google.android.material.appbar.AppBarLayout
                     android:layout_width="match_parent"
@@ -142,13 +141,6 @@
                     tools:listitem="@layout/item_mods_list" />
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
-            
-            <FrameLayout
-                android:id="@+id/ad_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"/>
 
         </RelativeLayout>
 

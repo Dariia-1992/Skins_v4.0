@@ -24,13 +24,11 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdView;
 import com.hi.appskin_v40.BuildConfig;
 import com.hi.appskin_v40.MainActivity;
 import com.hi.appskin_v40.R;
@@ -40,7 +38,6 @@ import com.hi.appskin_v40.dialogs.FileDownloadCompleteDialog;
 import com.hi.appskin_v40.dialogs.NotFoundDialog;
 import com.hi.appskin_v40.model.Skin;
 import com.hi.appskin_v40.model.SkinsRepository;
-import com.hi.appskin_v40.utils.AdHelper;
 import com.hi.appskin_v40.utils.Config;
 import com.hi.appskin_v40.utils.DownloadHelper;
 import com.hi.appskin_v40.utils.FavoritesManager;
@@ -66,10 +63,6 @@ public class ModDetailsFragment extends Fragment {
     private Handler handler = new Handler();
     private Runnable handlerRunnable;
 
-    // Banner Ad
-    private FrameLayout adContainer;
-    private AdView adView;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +84,6 @@ public class ModDetailsFragment extends Fragment {
         TextView description = view.findViewById(R.id.descriptionView);
         CircleIndicator indicator = view.findViewById(R.id.circleIndicator);
         View isUpdated = view.findViewById(R.id.isUpdate);
-        adContainer = view.findViewById(R.id.ad_container);
 
         viewPager.setAdapter(new ImagePagerAdapter(getContext(), skin.getBigImages()));
         indicator.setViewPager(viewPager);
@@ -102,10 +94,6 @@ public class ModDetailsFragment extends Fragment {
 
         setRating(view.findViewById(R.id.ratingContainer), skin.getRating());
         setDescriptionImages(view.findViewById(R.id.descImagesContainer), skin.getDescriptionImages());
-
-        // Initialize the Mobile Ads SDK.
-        adView = new AdView(requireContext());
-        adContainer.post(() -> AdHelper.loadBanner(ModDetailsFragment.this, adView, adContainer));
 
         ImageView download = view.findViewById(R.id.download_button);
         download.setOnClickListener(v -> {
@@ -134,10 +122,6 @@ public class ModDetailsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        if (adView != null) {
-            adView.resume();
-        }
 
         if (handlerRunnable != null)
             handler.post(handlerRunnable);
@@ -168,23 +152,10 @@ public class ModDetailsFragment extends Fragment {
     public void onPause() {
         super.onPause();
 
-        if (adView != null) {
-            adView.pause();
-        }
-
         handler.removeCallbacks(handlerRunnable);
 
         Context context = requireContext();
         context.unregisterReceiver(receiver);
-    }
-
-    @Override
-    public void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-
-        super.onDestroy();
     }
 
     @Override

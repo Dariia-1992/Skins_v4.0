@@ -9,15 +9,19 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.hi.appskin_v40.fragment.IRewardAdded;
+import com.hi.appskin_v40.fragment.MainFragment;
+import com.hi.appskin_v40.utils.AdHelper;
 import com.hi.appskin_v40.utils.LocalStorage;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
@@ -30,6 +34,10 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
     private IRewardAdded calledOnResume;
     private NavController navController;
 
+    // Banner Ad
+    private FrameLayout adContainer;
+    private AdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -41,6 +49,11 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+
+        // Banner ad
+        adContainer = findViewById(R.id.ad_container);
+        adView = new AdView(this);
+        adContainer.post(() -> AdHelper.loadBanner(this, adView, adContainer));
 
         // Interstitial ad
         interstitialAd = new InterstitialAd(this);
@@ -66,6 +79,10 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
         videoAd.resume(this);
         super.onResume();
 
+        if (adView != null) {
+            adView.resume();
+        }
+
         if (calledOnResume != null) {
             calledOnResume.onAddReward();
             calledOnResume = null;
@@ -75,12 +92,22 @@ public class MainActivity extends AppCompatActivity implements RewardedVideoAdLi
     @Override
     protected void onPause() {
         videoAd.pause(this);
+
+        if (adView != null) {
+            adView.pause();
+        }
+
         super.onPause();
     }
 
     @Override
     protected void onDestroy() {
         videoAd.destroy(this);
+
+        if (adView != null) {
+            adView.destroy();
+        }
+
         super.onDestroy();
     }
 

@@ -5,23 +5,21 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.widget.FrameLayout;
 
-import androidx.fragment.app.Fragment;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.hi.appskin_v40.R;
 
 public class AdHelper {
-    public static void loadBanner(Fragment fragment, AdView adView, FrameLayout adContainer) {
+    public static void loadBanner(Activity activity, AdView adView, FrameLayout adContainer) {
         // Create an ad request. Check your logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
-        adView.setAdUnitId(fragment.getString(R.string.banner_adunitid));
+        adView.setAdUnitId(activity.getString(R.string.banner_adunitid));
         adContainer.removeAllViews();
         adContainer.addView(adView);
 
-        AdSize adSize = getAdSize(fragment.requireActivity(), adContainer);
+        AdSize adSize = getAdSize(activity, adContainer);
         adView.setAdSize(adSize);
 
         AdRequest adRequest = new AdRequest.Builder()

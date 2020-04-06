@@ -58,6 +58,10 @@ public class MainFragment extends Fragment{
 
         View searchButton = view.findViewById(R.id.toolbar_search);
         searchButton.setOnClickListener(v -> setupSearch(true));
+        textLine = view.findViewById(R.id.under_text_line);
+        favoriteLine = view.findViewById(R.id.under_favorite_line);
+        favoriteLine.setVisibility(View.GONE);
+        textLine.setVisibility(View.VISIBLE);
 
         setupSearch(false);
         initMode();
@@ -71,9 +75,13 @@ public class MainFragment extends Fragment{
         if (MODE_FAVORITE) {
             allSkins.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color_favorite));
             favoriteList.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color));
+            setCheckedState(favoriteList, true, favoriteLine);
+            setCheckedState(allSkins, false, textLine);
         } else {
             favoriteList.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color_favorite));
             allSkins.setTextColor(ContextCompat.getColor(getContext(), R.color.toolbar_text_color));
+            setCheckedState(allSkins, true, textLine);
+            setCheckedState(favoriteList, false, favoriteLine);
         }
     }
 
@@ -89,10 +97,6 @@ public class MainFragment extends Fragment{
     private void initMode() {
         allSkins = view.findViewById(R.id.button_text);
         favoriteList = view.findViewById(R.id.button_favorite);
-        textLine = view.findViewById(R.id.under_text_line);
-        favoriteLine = view.findViewById(R.id.under_favorite_line);
-        favoriteLine.setVisibility(View.GONE);
-        textLine.setVisibility(View.VISIBLE);
 
         allSkins.setOnClickListener(v -> {
             setCheckedState(allSkins, true, textLine);

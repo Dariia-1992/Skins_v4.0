@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hi.appskin_v40.R;
 import com.hi.appskin_v40.adapter.SkinsAdapter;
@@ -36,6 +38,7 @@ public class MainFragment extends Fragment{
     private List<Skin> favoriteSkins = new ArrayList<>();
 
     private View view;
+    private SwipeRefreshLayout refreshLayout;
     private SkinsAdapter adapter;
     private String searchStr;
 
@@ -50,11 +53,14 @@ public class MainFragment extends Fragment{
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_main, container, false);
 
+        refreshLayout = view.findViewById(R.id.refreshLayout);
+        refreshLayout.setOnRefreshListener(this::refreshItems);
+
+        fulSkins = SkinsRepository.getItems();
         adapter = new SkinsAdapter(currentList, listener);
         RecyclerView recyclerView = view.findViewById(R.id.contentView);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        loadSkinsInfo();
 
         View searchButton = view.findViewById(R.id.toolbar_search);
         searchButton.setOnClickListener(v -> setupSearch(true));
@@ -65,6 +71,12 @@ public class MainFragment extends Fragment{
 
         setupSearch(false);
         initMode();
+
+        if (SkinsRepository.getItems().isEmpty())
+            refreshItems();
+        else
+            setCurrent(fulSkins);
+
         return view;
     }
 
@@ -83,6 +95,17 @@ public class MainFragment extends Fragment{
             setCheckedState(allSkins, true, textLine);
             setCheckedState(favoriteList, false, favoriteLine);
         }
+    }
+
+    private void refreshItems() {
+        refreshLayout.setRefreshing(true);
+        SkinsRepository.loadData(() -> {
+            refreshLayout.setRefreshing(false);
+            setCurrent(fulSkins);
+        }, error -> {
+            refreshLayout.setRefreshing(false);
+            Toast.makeText(getContext(), error, Toast.LENGTH_LONG).show();
+        });
     }
 
     private void getFavorite() {
@@ -112,16 +135,6 @@ public class MainFragment extends Fragment{
             setCurrent(favoriteSkins);
             MODE_FAVORITE = true;
         });
-    }
-
-    private void loadSkinsInfo() {
-        List<Skin> skins = SkinsRepository.getItems();
-        if (skins ==null || skins.isEmpty())
-            return;
-        fulSkins.clear();
-        fulSkins.addAll(skins);
-
-        setCurrent(fulSkins);
     }
 
     private void setupSearch(boolean show){

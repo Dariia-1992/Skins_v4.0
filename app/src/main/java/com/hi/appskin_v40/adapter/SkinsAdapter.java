@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hi.appskin_v40.R;
 import com.hi.appskin_v40.model.Skin;
+import com.hi.appskin_v40.utils.DownloadHelper;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,7 +39,9 @@ public class SkinsAdapter extends RecyclerView.Adapter<SkinsAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         final Skin skin = items.get(position);
-        holder.postImageView.setImageResource(skin.getFirstImage());
+        Picasso.get()
+                .load(DownloadHelper.getThumbnailUrl(skin.getThumbnail()))
+                .into(holder.postImageView);
         holder.titleView.setText(skin.getTitle());
         holder.isUpdate.setVisibility(skin.isUpdatedToday() ? View.VISIBLE : View.GONE);
         setRating(holder, skin);

@@ -1,34 +1,31 @@
 package com.hi.appskin_v40.model;
 
-import androidx.annotation.StringRes;
-
 import com.hi.appskin_v40.utils.MD5;
 
-public class Skin {
-    private String id;
-    private String title;
-    private int[] bigImages;
-    private int rating;
-    private @StringRes int description;
-    private String url;
-    private int [] descriptionImages;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.UUID;
 
-    public Skin(String id, String title, int[] bigImage, int rating, int description, String url, int [] descriptionImages) {
-        this.id = id;
-        this.title = title;
-        this.bigImages = bigImage;
-        this.rating = rating;
-        this.description = description;
-        this.url = url;
-        this.descriptionImages = descriptionImages;
-    }
+public class Skin {
+    private final String id = UUID.randomUUID().toString();
+    private String category;
+    private Date date;
+    private String description;
+    private String mod;
+    private ArrayList<String> screenShots;
+    private String thumbnail;
+    private String title;
+    private int rating = 5; // local data
 
     public String getId() { return id; }
+    public String getCategory() { return category; }
+    public Date getDate() { return date; }
+    public String getDescription() { return description; }
+    public String getMod() { return mod; }
+    public ArrayList<String> getScreenShots() { return screenShots; }
+    public String getThumbnail() { return thumbnail; }
     public String getTitle() { return title; }
-    public int[] getBigImages() { return bigImages; }
-    public int getDescription() { return description; }
-    public String getUrl() { return url; }
-    public int[] getDescriptionImages() { return descriptionImages; }
+    public boolean isUpdatedToday() { return true; }
 
     public int getRating() {
         if (rating < 0)
@@ -39,13 +36,8 @@ public class Skin {
 
         return rating;
     }
-    public int getFirstImage() {
-        return bigImages.length == 0 ? 0 : bigImages[0];
-    }
 
     public String generateKey() {
-        return MD5.generate(title + url);
+        return MD5.generate(title + mod);
     }
-
-    public boolean isUpdatedToday() { return true; }
 }

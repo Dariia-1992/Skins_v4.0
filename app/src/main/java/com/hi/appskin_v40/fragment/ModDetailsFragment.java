@@ -21,6 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Environment;
 import android.os.Handler;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +43,10 @@ import com.hi.appskin_v40.utils.Config;
 import com.hi.appskin_v40.utils.DownloadHelper;
 import com.hi.appskin_v40.utils.FavoritesManager;
 import com.hi.appskin_v40.utils.LocalStorage;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
@@ -85,15 +88,16 @@ public class ModDetailsFragment extends Fragment {
         CircleIndicator indicator = view.findViewById(R.id.circleIndicator);
         View isUpdated = view.findViewById(R.id.isUpdate);
 
-        viewPager.setAdapter(new ImagePagerAdapter(getContext(), skin.getBigImages()));
+        viewPager.setAdapter(new ImagePagerAdapter(getContext(), null));
         indicator.setViewPager(viewPager);
-        indicator.setVisibility(skin.getBigImages().length == 1 ? View.GONE : View.VISIBLE);
+        indicator.setVisibility(View.GONE);
+
         skinTitle.setText(skin.getTitle());
-        description.setText(skin.getDescription());
+        description.setText(Html.fromHtml(skin.getDescription()));
         isUpdated.setVisibility(skin.isUpdatedToday() ? View.VISIBLE : View.GONE);
 
         setRating(view.findViewById(R.id.ratingContainer), skin.getRating());
-        setDescriptionImages(view.findViewById(R.id.descImagesContainer), skin.getDescriptionImages());
+        setDescriptionImages(view.findViewById(R.id.descImagesContainer), skin.getScreenShots());
 
         ImageView download = view.findViewById(R.id.download_button);
         download.setOnClickListener(v -> {
@@ -194,7 +198,7 @@ public class ModDetailsFragment extends Fragment {
     }
 
     private void openDownloadedFile() {
-        String fileName = Uri.parse(skin.getUrl()).getLastPathSegment();
+        String fileName = Uri.parse(skin.getMod()).getLastPathSegment();
         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
         Uri fileUri = FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID + ".fileprovider", file);
         Intent myIntent = new Intent(Intent.ACTION_VIEW);
@@ -223,13 +227,16 @@ public class ModDetailsFragment extends Fragment {
         }
     }
 
-    private void setDescriptionImages(ViewGroup group, int[] descriptionImages) {
+    private void setDescriptionImages(ViewGroup group, ArrayList<String> descriptionImages) {
         group.removeAllViews();
-        for (int descriptionImage : descriptionImages) {
+        for (String descriptionImage : descriptionImages) {
             View view = LayoutInflater.from(requireContext()).inflate(R.layout.item_image_in_description, group, false);
             AppCompatImageView iv = view.findViewById(R.id.ivDescImage);
-            iv.setImageDrawable(ContextCompat.getDrawable(requireContext(), descriptionImage));
             group.addView(view);
+
+            Picasso.get()
+                    .load(DownloadHelper.getScreenshotlUrl(descriptionImage))
+                    .into(iv);
         }
     }
 
@@ -240,7 +247,7 @@ public class ModDetailsFragment extends Fragment {
             return;
 
         if (EasyPermissions.hasPermissions(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            long id = DownloadHelper.downloadFile(requireContext(), skin.getUrl());
+            long id = DownloadHelper.downloadFile(requireContext(), skin.getMod());
             if (id == 0) {
                 Toast.makeText(context, "Download error. Please try later", Toast.LENGTH_LONG).show();
             } else {

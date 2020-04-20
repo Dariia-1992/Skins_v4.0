@@ -18,6 +18,16 @@ public class DownloadHelper {
         Downloading
     }
 
+    public static String getThumbnailUrl(String name) {
+        String correctName = name.replaceFirst("/", "%2F");
+        return "https://firebasestorage.googleapis.com/v0/b/modify-fiv.appspot.com/o/" + correctName + "?alt=media";
+    }
+
+    public static String getScreenshotlUrl(String name) {
+        String correctName = name.replaceFirst("/", "%2F");
+        return "https://firebasestorage.googleapis.com/v0/b/modify-fiv.appspot.com/o/" + correctName + "?alt=media";
+    }
+
     public static long downloadFile(Context context, String fileUrl) {
         Uri uri = Uri.parse(fileUrl);
         DownloadManager.Request request = new DownloadManager.Request(uri);

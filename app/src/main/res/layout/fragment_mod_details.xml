@@ -71,25 +71,30 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/corner_rectangle">
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewPager"
+<!--                <androidx.viewpager.widget.ViewPager-->
+<!--                    android:id="@+id/viewPager"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/background_image_height"/>-->
+                <ImageView
+                    android:id="@+id/skinImage"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/background_image_height"/>
+                    android:layout_height="@dimen/background_image_height"
+                    android:scaleType="centerCrop"/>
 
-                <me.relex.circleindicator.CircleIndicator
-                    android:id="@+id/circleIndicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/viewPager"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="12dp" />
+<!--                <me.relex.circleindicator.CircleIndicator-->
+<!--                    android:id="@+id/circleIndicator"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignBottom="@+id/skinImage"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:layout_marginBottom="12dp" />-->
                 <TextView
                     android:id="@+id/titleView"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:layout_below="@id/viewPager"
+                    android:layout_below="@id/skinImage"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="18sp"
                     android:layout_centerVertical="true"

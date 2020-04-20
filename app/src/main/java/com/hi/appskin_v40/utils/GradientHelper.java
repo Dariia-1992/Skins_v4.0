@@ -23,4 +23,13 @@ public class GradientHelper {
 
         return new LayerDrawable(new Drawable[] { imageDrawable, shadowDrawable });
     }
+
+    public static Drawable getGradient(Resources resources) {
+        int[] shadowColors = resources.getIntArray(R.array.shadow_gradient);
+        GradientDrawable shadowDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, shadowColors);
+        shadowDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        shadowDrawable.setShape(GradientDrawable.RECTANGLE);
+
+        return shadowDrawable;
+    }
 }

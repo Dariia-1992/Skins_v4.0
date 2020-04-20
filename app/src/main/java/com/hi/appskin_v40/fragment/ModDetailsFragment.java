@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ import com.hi.appskin_v40.model.SkinsRepository;
 import com.hi.appskin_v40.utils.Config;
 import com.hi.appskin_v40.utils.DownloadHelper;
 import com.hi.appskin_v40.utils.FavoritesManager;
+import com.hi.appskin_v40.utils.GradientHelper;
 import com.hi.appskin_v40.utils.LocalStorage;
 import com.squareup.picasso.Picasso;
 
@@ -82,15 +84,20 @@ public class ModDetailsFragment extends Fragment {
 
         MainActivity activity = (MainActivity) requireActivity();
 
-        ViewPager viewPager = view.findViewById(R.id.viewPager);
+        //ViewPager viewPager = view.findViewById(R.id.viewPager);
         TextView skinTitle = view.findViewById(R.id.titleView);
         TextView description = view.findViewById(R.id.descriptionView);
-        CircleIndicator indicator = view.findViewById(R.id.circleIndicator);
+        ImageView image = view.findViewById(R.id.skinImage);
+        //CircleIndicator indicator = view.findViewById(R.id.circleIndicator);
         View isUpdated = view.findViewById(R.id.isUpdate);
 
-        viewPager.setAdapter(new ImagePagerAdapter(getContext(), null));
-        indicator.setViewPager(viewPager);
-        indicator.setVisibility(View.GONE);
+        //viewPager.setAdapter(new ImagePagerAdapter(getContext(), null));
+        //indicator.setViewPager(viewPager);
+        //indicator.setVisibility(View.GONE);
+
+        Picasso.get()
+                .load(DownloadHelper.getThumbnailUrl(skin.getThumbnail()))
+                .into(image);
 
         skinTitle.setText(skin.getTitle());
         description.setText(Html.fromHtml(skin.getDescription()));

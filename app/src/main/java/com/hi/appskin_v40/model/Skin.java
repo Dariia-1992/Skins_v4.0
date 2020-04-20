@@ -2,7 +2,11 @@ package com.hi.appskin_v40.model;
 
 import com.hi.appskin_v40.utils.MD5;
 
+import android.text.format.DateFormat;
+import android.text.format.DateUtils;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -25,7 +29,12 @@ public class Skin {
     public ArrayList<String> getScreenShots() { return screenShots; }
     public String getThumbnail() { return thumbnail; }
     public String getTitle() { return title; }
-    public boolean isUpdatedToday() { return true; }
+
+    public boolean isUpdatedToday() {
+        if (date == null)
+            return false;
+        return DateUtils.isToday(date.getTime());
+    }
 
     public int getRating() {
         if (rating < 0)
